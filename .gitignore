@@ -3,10 +3,11 @@
 
 #build files
 build/
-utag.app/
+utext.app/
 
 # Ignore a file without extension
-utag/utag
+utext/utext
+utext
 
 #CMAKE
 CMakeLists.txt.user
