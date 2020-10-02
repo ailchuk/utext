@@ -10,6 +10,10 @@
 #include <QFontDialog>
 #include <QColor>
 #include <QColorDialog>
+#include <QFileSystemModel>
+#include <QThread>
+
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +26,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void createTreeView();
 
 private slots:
     void on_actionNew_triggered();
@@ -52,8 +57,12 @@ private slots:
 
     void on_actionLight_theme_triggered();
 
+    void on_treeView_doubleClicked(const QModelIndex &idx);
+
 private:
     Ui::MainWindow *m_ui;
     QString m_file_path;
+    QFileSystemModel *m_model;
+
 };
 #endif // MAINWINDOW_H

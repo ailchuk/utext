@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
-    this->setCentralWidget(m_ui->textEdit);
     this->on_actionDark_theme_triggered();
+    createTreeView();
 }
 
 MainWindow::~MainWindow()
@@ -15,25 +15,35 @@ MainWindow::~MainWindow()
     delete m_ui;
 }
 
+void MainWindow::createTreeView() {
+    m_model = new QFileSystemModel;
+    QDir dir1 = QFileInfo(m_file_path).absoluteDir();
+    QString dir = dir1.path();
+    m_model->setRootPath(dir1.absolutePath());
 
-void MainWindow::on_actionNew_triggered()
-{
-    m_file_path = "";
-    m_ui->textEdit->setText("");
+    m_ui->treeView->setModel(m_model);
+    m_ui->treeView->setRootIndex(m_model->index(dir));
+    m_ui->treeView->header()->hideSection(1);
+    m_ui->treeView->header()->hideSection(2);
+    m_ui->treeView->header()->hideSection(3);
+
 }
 
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::on_treeView_doubleClicked(const QModelIndex &idx)
 {
-    QString file_name = QFileDialog::getOpenFileName(this, "Open file");
-    if (file_name.isEmpty()) {
+    if (!idx.isValid() || !m_model->fileInfo(idx).isFile()) {
+        QMessageBox::warning(this, "utext: Error", "Selected item error!");
+        return;
+    } else if (m_model->fileInfo(idx).fileName().isEmpty()) {
         return;
     }
-    QFile file(file_name);
 
-    m_file_path = file_name;
+    QFile file(m_model->fileInfo(idx).absoluteFilePath());
+
+    m_file_path = file.fileName();
 
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, "utext: Error", "file not opened!");
+        QMessageBox::warning(this, "utext: Error", "Selected file not opened!");
         return;
     }
 
@@ -44,94 +54,4 @@ void MainWindow::on_actionOpen_triggered()
     file.close();
 }
 
-void MainWindow::on_actionSave_triggered()
-{
-    QFile file(m_file_path);
 
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "utext: Error", "file not opened!");
-        return;
-    }
-
-    QTextStream out(&file);
-    QString text = m_ui->textEdit->toPlainText();
-
-    out << text;
-    file.flush();
-    file.close();
-}
-
-void MainWindow::on_actionSave_as_triggered()
-{
-    QString file_name = QFileDialog::getSaveFileName(this, "Open file");
-    QFile file(file_name);
-
-    m_file_path = file_name;
-
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "utext: Error", "file not opened!");
-        return;
-    }
-
-    QTextStream out(&file);
-    QString text = m_ui->textEdit->toPlainText();
-
-    out << text;
-    file.flush();
-    file.close();
-}
-
-void MainWindow::on_actionCut_triggered()
-{
-    m_ui->textEdit->cut();
-}
-
-void MainWindow::on_actionCopy_triggered()
-{
-    m_ui->textEdit->copy();
-}
-
-void MainWindow::on_actionPaste_triggered()
-{
-    m_ui->textEdit->paste();
-}
-
-void MainWindow::on_actionRedo_triggered()
-{
-    m_ui->textEdit->redo();
-}
-
-void MainWindow::on_actionUndo_triggered()
-{
-    m_ui->textEdit->undo();
-}
-
-void MainWindow::on_actionFont_triggered()
-{
-    bool is_font;
-    QFont font = QFontDialog::getFont(&is_font, this);
-
-    if (is_font) {
-        m_ui->textEdit->setFont(font);
-    } else {
-        return;
-    }
-}
-
-void MainWindow::on_actionColor_triggered()
-{
-    QColor color = QColorDialog::getColor(Qt::white, this, "Choose Color");
-
-    if (color.isValid()) {
-        m_ui->textEdit->setTextColor(color);
-    }
-}
-
-void MainWindow::on_actionBackground_Color_triggered()
-{
-    QColor background_color = QColorDialog::getColor(Qt::white, this, "Choose Background Color");
-
-    if (background_color.isValid()) {
-        m_ui->textEdit->setTextBackgroundColor(background_color);
-    }
-}
