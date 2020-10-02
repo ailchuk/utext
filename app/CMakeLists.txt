@@ -18,9 +18,11 @@ include_directories(src)
 
 add_subdirectory(src)
 
+qt5_add_resources(RESOURCES resources/myres.qrc)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../)
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+add_executable(${CMAKE_PROJECT_NAME} main.cpp ${RESOURCES})
 
 target_link_libraries(
     ${CMAKE_PROJECT_NAME}

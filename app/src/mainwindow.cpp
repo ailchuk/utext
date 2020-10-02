@@ -3,13 +3,135 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , m_ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    m_ui->setupUi(this);
+    this->setCentralWidget(m_ui->textEdit);
+    this->on_actionDark_theme_triggered();
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete m_ui;
 }
 
+
+void MainWindow::on_actionNew_triggered()
+{
+    m_file_path = "";
+    m_ui->textEdit->setText("");
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString file_name = QFileDialog::getOpenFileName(this, "Open file");
+    if (file_name.isEmpty()) {
+        return;
+    }
+    QFile file(file_name);
+
+    m_file_path = file_name;
+
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, "utext: Error", "file not opened!");
+        return;
+    }
+
+    QTextStream in(&file);
+    QString text = in.readAll();
+
+    m_ui->textEdit->setText(text);
+    file.close();
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    QFile file(m_file_path);
+
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "utext: Error", "file not opened!");
+        return;
+    }
+
+    QTextStream out(&file);
+    QString text = m_ui->textEdit->toPlainText();
+
+    out << text;
+    file.flush();
+    file.close();
+}
+
+void MainWindow::on_actionSave_as_triggered()
+{
+    QString file_name = QFileDialog::getSaveFileName(this, "Open file");
+    QFile file(file_name);
+
+    m_file_path = file_name;
+
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "utext: Error", "file not opened!");
+        return;
+    }
+
+    QTextStream out(&file);
+    QString text = m_ui->textEdit->toPlainText();
+
+    out << text;
+    file.flush();
+    file.close();
+}
+
+void MainWindow::on_actionCut_triggered()
+{
+    m_ui->textEdit->cut();
+}
+
+void MainWindow::on_actionCopy_triggered()
+{
+    m_ui->textEdit->copy();
+}
+
+void MainWindow::on_actionPaste_triggered()
+{
+    m_ui->textEdit->paste();
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    m_ui->textEdit->redo();
+}
+
+void MainWindow::on_actionUndo_triggered()
+{
+    m_ui->textEdit->undo();
+}
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool is_font;
+    QFont font = QFontDialog::getFont(&is_font, this);
+
+    if (is_font) {
+        m_ui->textEdit->setFont(font);
+    } else {
+        return;
+    }
+}
+
+void MainWindow::on_actionColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white, this, "Choose Color");
+
+    if (color.isValid()) {
+        m_ui->textEdit->setTextColor(color);
+    }
+}
+
+void MainWindow::on_actionBackground_Color_triggered()
+{
+    QColor background_color = QColorDialog::getColor(Qt::white, this, "Choose Background Color");
+
+    if (background_color.isValid()) {
+        m_ui->textEdit->setTextBackgroundColor(background_color);
+    }
+}

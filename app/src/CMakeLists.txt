@@ -1,4 +1,4 @@
-set(SOURCES mainwindow.cpp)
+set(SOURCES mainwindow.cpp theme.cpp)
 
 set(HEADERS mainwindow.h)
 
