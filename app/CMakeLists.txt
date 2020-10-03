@@ -22,7 +22,9 @@ qt5_add_resources(RESOURCES resources/myres.qrc)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../)
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp ${RESOURCES})
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/resources/app_win32.rc") #change for macos in future
+
+add_executable(${CMAKE_PROJECT_NAME} main.cpp ${RESOURCES} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_link_libraries(
     ${CMAKE_PROJECT_NAME}
