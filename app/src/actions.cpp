@@ -40,9 +40,8 @@ void MainWindow::on_actionSave_triggered()
     }
 
     QFile file(m_file_path);
-
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "utext: Error", "File not opened!");
+    if (!file.open(QFile::WriteOnly | QFile::Text) || !file.isWritable()) {
+        QMessageBox::warning(this, "utext: Error", "Can't open/write file!\n ");
         return;
     }
 

@@ -11,8 +11,8 @@
 #include <QColor>
 #include <QColorDialog>
 #include <QFileSystemModel>
-#include <QThread>
-
+#include <QLabel>
+#include <QWidget>
 #include <QDebug>
 
 QT_BEGIN_NAMESPACE
@@ -29,6 +29,8 @@ public:
     void createTreeView();
 
 private slots:
+    void showCursorPos();
+
     void on_actionNew_triggered();
 
     void on_actionOpen_triggered();
