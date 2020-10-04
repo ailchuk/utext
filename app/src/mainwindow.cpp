@@ -8,12 +8,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->setupUi(this);
     this->on_actionDark_theme_triggered();
     createTreeView();
-
-    connect(m_ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(showCursorPos()));
 }
 
 MainWindow::~MainWindow()
 {
     delete m_ui;
+    delete m_find_dialog;
 }
 

@@ -1,8 +1,8 @@
-set(SOURCES mainwindow.cpp theme.cpp actions.cpp utils.cpp clicks.cpp)
+set(SOURCES mainwindow.cpp theme.cpp actions.cpp utils.cpp clicks.cpp myfind.cpp searchhighlight.cpp)
 
-set(HEADERS mainwindow.h)
+set(HEADERS mainwindow.h myfind.h searchhighlight.h)
 
-set(UI mainwindow.ui)
+set(UI mainwindow.ui myfind.ui)
 
 add_library(src ${SOURCES} ${HEADERS} ${UI})
 

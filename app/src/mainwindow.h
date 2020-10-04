@@ -15,6 +15,8 @@
 #include <QWidget>
 #include <QDebug>
 
+#include "myfind.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -61,10 +63,12 @@ private slots:
 
     void on_treeView_doubleClicked(const QModelIndex &idx);
 
+    void on_actionFind_triggered();
+
 private:
     Ui::MainWindow *m_ui;
     QString m_file_path;
     QFileSystemModel *m_model;
-
+    MyFind *m_find_dialog;
 };
 #endif // MAINWINDOW_H

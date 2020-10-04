@@ -117,14 +117,24 @@
     <addaction name="actionLight_theme"/>
     <addaction name="actionDark_theme"/>
    </widget>
+   <widget class="QMenu" name="menuFind">
+    <property name="title">
+     <string>Find</string>
+    </property>
+    <addaction name="actionFind"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuAppearance"/>
+   <addaction name="menuFind"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -147,6 +157,7 @@
    <addaction name="actionFont"/>
    <addaction name="actionColor"/>
    <addaction name="actionBackground_Color"/>
+   <addaction name="actionFind"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -273,6 +284,20 @@
    </property>
    <property name="text">
     <string>Background Color Text</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="../resources/myres.qrc">
+     <normaloff>:/find.png</normaloff>:/find.png</iconset>
+   </property>
+   <property name="text">
+    <string>Find</string>
+   </property>
+  </action>
+  <action name="actionReplace">
+   <property name="text">
+    <string>Replace</string>
    </property>
   </action>
  </widget>

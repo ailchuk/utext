@@ -12,5 +12,6 @@
         <file>font.png</file>
         <file>color.png</file>
         <file>background_color.png</file>
+        <file>find.png</file>
     </qresource>
 </RCC>

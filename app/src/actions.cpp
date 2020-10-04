@@ -132,3 +132,10 @@ void MainWindow::on_actionBackground_Color_triggered()
         m_ui->textEdit->setTextBackgroundColor(background_color);
     }
 }
+
+void MainWindow::on_actionFind_triggered()
+{
+    m_find_dialog = new MyFind(this, m_ui->textEdit);
+    m_find_dialog->show();
+}
+
