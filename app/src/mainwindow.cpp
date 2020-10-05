@@ -14,6 +14,5 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete m_ui;
-    delete m_find_dialog;
 }
 
