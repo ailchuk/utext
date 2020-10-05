@@ -57,10 +57,6 @@ private slots:
 
     void on_actionBackground_Color_triggered();
 
-    void on_actionDark_theme_triggered();
-
-    void on_actionLight_theme_triggered();
-
     void on_treeView_doubleClicked(const QModelIndex &idx);
 
     void on_actionFind_triggered();

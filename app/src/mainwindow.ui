@@ -110,13 +110,6 @@
     <addaction name="actionColor"/>
     <addaction name="actionBackground_Color"/>
    </widget>
-   <widget class="QMenu" name="menuAppearance">
-    <property name="title">
-     <string>Appearance</string>
-    </property>
-    <addaction name="actionLight_theme"/>
-    <addaction name="actionDark_theme"/>
-   </widget>
    <widget class="QMenu" name="menuFind">
     <property name="title">
      <string>Find</string>
@@ -125,7 +118,6 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuAppearance"/>
    <addaction name="menuFind"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -191,6 +183,9 @@
    <property name="text">
     <string>Save</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionSave_as">
    <property name="icon">
@@ -199,6 +194,9 @@
    </property>
    <property name="text">
     <string>Save as</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionCut">
@@ -235,6 +233,9 @@
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
    </property>
   </action>
   <action name="actionUndo">
@@ -299,6 +300,9 @@
    </property>
    <property name="text">
     <string>Find</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
   <action name="actionReplace">
