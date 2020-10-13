@@ -4,7 +4,7 @@
 
 #include <QSyntaxHighlighter>
 
-MyFind::MyFind(QWidget *parent, QTextEdit *textEdit) :
+MyFind::MyFind(QWidget *parent, QTextEdit *textEdit, QString *selected_text) :
     QDialog(parent),
     m_findui(new Ui::MyFind),
     m_textEdit(textEdit)
@@ -13,6 +13,7 @@ MyFind::MyFind(QWidget *parent, QTextEdit *textEdit) :
     this->setFixedSize(QSize(420, 85));
     m_search_highLight = new SearchHighLight(m_textEdit->document());
     setWindowFlag(Qt::WindowContextHelpButtonHint,false);
+    m_findui->findLine->setText(*selected_text);
 }
 
 MyFind::~MyFind()

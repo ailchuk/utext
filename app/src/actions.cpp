@@ -135,7 +135,16 @@ void MainWindow::on_actionBackground_Color_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    m_find_dialog = new MyFind(this, m_ui->textEdit);
+    QTextCursor cursor(m_ui->textEdit->textCursor());
+    QString sel = cursor.selectedText();
+
+    m_find_dialog = new MyFind(this, m_ui->textEdit, &sel);
     m_find_dialog->show();
 }
 
+void MainWindow::on_textEdit_selectionChanged()
+{
+
+
+
+}

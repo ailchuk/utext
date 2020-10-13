@@ -61,6 +61,8 @@ private slots:
 
     void on_actionFind_triggered();
 
+    void on_textEdit_selectionChanged();
+
 private:
     Ui::MainWindow *m_ui;
     QString m_file_path;

@@ -15,7 +15,7 @@ class MyFind : public QDialog
     Q_OBJECT
 
 public:
-    explicit MyFind(QWidget *parent = nullptr, QTextEdit *textEdit = nullptr);
+    explicit MyFind(QWidget *parent = nullptr, QTextEdit *textEdit = nullptr, QString *selected_text = nullptr);
     ~MyFind();
     void closeEvent(QCloseEvent *event);
 
