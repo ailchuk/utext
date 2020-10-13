@@ -129,10 +129,3 @@ void MainWindow::on_actionFind_triggered()
     m_find_dialog = new MyFind(this, m_ui->textEdit, &sel);
     m_find_dialog->show();
 }
-
-void MainWindow::on_textEdit_selectionChanged()
-{
-
-
-
-}
