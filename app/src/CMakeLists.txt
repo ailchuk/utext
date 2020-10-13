@@ -1,4 +1,4 @@
-set(SOURCES mainwindow.cpp actions.cpp utils.cpp clicks.cpp myfind.cpp searchhighlight.cpp highlighter.cpp openFile.cpp)
+set(SOURCES mainwindow.cpp actions.cpp utils.cpp clicks.cpp myfind.cpp searchhighlight.cpp highlighter.cpp openFile.cpp themes.cpp)
 
 set(HEADERS mainwindow.h myfind.h searchhighlight.h highlighter.h openFile.h)
 

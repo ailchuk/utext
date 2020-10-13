@@ -116,9 +116,17 @@
     </property>
     <addaction name="actionFind"/>
    </widget>
+   <widget class="QMenu" name="menuAppearance">
+    <property name="title">
+     <string>Appearance</string>
+    </property>
+    <addaction name="actionLight_theme"/>
+    <addaction name="actionDark_theme"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuFind"/>
+   <addaction name="menuAppearance"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -270,6 +278,9 @@
    <property name="text">
     <string>Font</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
   </action>
   <action name="actionColor">
    <property name="icon">
@@ -279,6 +290,9 @@
    <property name="text">
     <string>Color Text</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+C</string>
+   </property>
   </action>
   <action name="actionBackground_Color">
    <property name="icon">
@@ -287,6 +301,9 @@
    </property>
    <property name="text">
     <string>Background Color Text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+B</string>
    </property>
   </action>
   <action name="actionFind">
@@ -304,6 +321,22 @@
   <action name="actionReplace">
    <property name="text">
     <string>Replace</string>
+   </property>
+  </action>
+  <action name="actionLight_theme">
+   <property name="text">
+    <string>Light theme</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+L</string>
+   </property>
+  </action>
+  <action name="actionDark_theme">
+   <property name="text">
+    <string>Dark theme</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
    </property>
   </action>
  </widget>

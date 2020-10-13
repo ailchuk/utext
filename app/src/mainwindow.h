@@ -63,7 +63,9 @@ private slots:
 
     void on_actionFind_triggered();
 
-    void on_textEdit_selectionChanged();
+    void on_actionLight_theme_triggered();
+
+    void on_actionDark_theme_triggered();
 
 private:
     Ui::MainWindow *m_ui;
