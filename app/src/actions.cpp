@@ -15,20 +15,12 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
 
-    QFile file(file_name);
-
-    if (!file.open(QFile::ReadOnly | QFile::Text) || !file.isReadable()) {
+    if (!openFileWithHighlight(&m_ui->textEdit, &highlighter, file_name)) {
         QMessageBox::warning(this, "utext: Error", "Can't read/open file!");
         return;
     }
 
     m_file_path = file_name;
-
-    QTextStream in(&file);
-    QString text = in.readAll();
-
-    m_ui->textEdit->setText(text);
-    file.close();
     createTreeView();
 }
 
@@ -46,11 +38,9 @@ void MainWindow::on_actionSave_triggered()
     }
 
     QTextStream out(&file);
-    QString text = m_ui->textEdit->toPlainText();
 
-    out << text;
+    out << m_ui->textEdit->toPlainText();
     file.flush();
-    file.close();
 }
 
 void MainWindow::on_actionSave_as_triggered()
@@ -71,11 +61,9 @@ void MainWindow::on_actionSave_as_triggered()
     m_file_path = file_name;
 
     QTextStream out(&file);
-    QString text = m_ui->textEdit->toPlainText();
 
-    out << text;
+    out << m_ui->textEdit->toPlainText();
     file.flush();
-    file.close();
 }
 
 void MainWindow::on_actionCut_triggered()

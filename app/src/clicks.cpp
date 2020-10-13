@@ -13,18 +13,10 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &idx)
         return;
     }
 
-    QFile file(m_model->fileInfo(idx).absoluteFilePath());
-
-    m_file_path = file.fileName();
-
-    if (!file.open(QFile::ReadOnly | QFile::Text) || !file.isReadable()) {
+    if (!openFileWithHighlight(&m_ui->textEdit, &highlighter, m_model->fileInfo(idx).absoluteFilePath())) {
         QMessageBox::warning(this, "utext: Error", "Can't read/open selected file!");
         return;
     }
 
-    QTextStream in(&file);
-    QString text = in.readAll();
-
-    m_ui->textEdit->setText(text);
-    file.close();
+    m_file_path = m_model->fileInfo(idx).absoluteFilePath();
 }
