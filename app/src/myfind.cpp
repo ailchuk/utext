@@ -13,7 +13,11 @@ MyFind::MyFind(QWidget *parent, QTextEdit *textEdit, QString *selected_text) :
     this->setFixedSize(QSize(420, 85));
     m_search_highLight = new SearchHighLight(m_textEdit->document());
     setWindowFlag(Qt::WindowContextHelpButtonHint,false);
-    m_findui->findLine->setText(*selected_text);
+    if (!selected_text->isEmpty()) {
+        m_findui->findLine->setText(*selected_text);
+        on_findButton_clicked();
+        qDebug() << "select";
+    }
 }
 
 MyFind::~MyFind()
