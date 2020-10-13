@@ -24,12 +24,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../)
 
 #Set app icon
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(MACOSX_BUNDLE_ICON_FILE utag_icon.icns)
+    set(MACOSX_BUNDLE_ICON_FILE utag_icon.ico)
     set(APP_ICON_RESOURCE ${CMAKE_CURRENT_SOURCE_DIR}/resources/utext_icon.icns)
     set_source_files_properties(${APP_ICON_RESOURCE} PROPERTIES
                MACOSX_PACKAGE_LOCATION "Resources")
 
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE main.cpp ${APP_ICON_RESOURCE})
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE main.cpp ${RESOURCES} ${APP_ICON_RESOURCE})
 else()
     set(APP_ICON_RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/resources/app_win32.rc")
 
