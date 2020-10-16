@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->setupUi(this);
     createTreeView();
 
+    on_actionLight_theme_triggered();
     connect(m_ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(showCursorPos()));
 }
 
