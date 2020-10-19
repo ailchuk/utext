@@ -8,6 +8,9 @@
 #include <QCompleter>
 #include <QFocusEvent>
 #include <QKeyEvent>
+#include <QAbstractItemModel>
+#include <QScrollBar>
+#include <QAbstractItemView>
 
 class MyTextEdit : public QTextEdit
 {
@@ -17,21 +20,20 @@ public:
     explicit MyTextEdit(const QString &text, QWidget *parent = nullptr);
     ~MyTextEdit() {};
 
-    //void setCompleter(QCompleter *c);
-    //QCompleter *completer() const;
-
 protected:
-    //void keyPressEvent(QKeyEvent *e) override;
-    //void focusInEvent(QFocusEvent *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
+    void focusInEvent(QFocusEvent *e) override;
 
 private slots:
-    //void insertCompletion(const QString &completion);
+    void insertCompletion(const QString &completion);
 
 private:
-    //QString textUnderCursor() const;
+    QString textUnderCursor() const;
+    QAbstractItemModel* modelFromFile(const QString& fileName);
 
 private:
-    //QCompleter *c = nullptr;
+    QCompleter *c = nullptr;
+    void setCompleter();
 
 };
 

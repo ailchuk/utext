@@ -9,8 +9,7 @@ bool openFileWithHighlight(MyTextEdit **textEdit, Highlighter **highlighter, con
         return false;
     }
 
-    (*textEdit)->setText(file.readAll());
-    //m_ui->textEdit->setPlainText(file.readAll());
+    (*textEdit)->setPlainText(file.readAll());
     return true;
 }
 
@@ -21,6 +20,6 @@ bool openFileWithoutHighlight(MyTextEdit **textEdit, QString &file_path) {
         return false;
     }
 
-    (*textEdit)->setText(file.readAll());
+    (*textEdit)->setPlainText(file.readAll());
     return true;
 }
