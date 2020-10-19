@@ -18,6 +18,7 @@
 #include "myfind.h"
 #include "highlighter.h"
 #include "openFile.h"
+#include "mytextedit.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
