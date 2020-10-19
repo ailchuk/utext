@@ -9,7 +9,7 @@ QAbstractItemModel *MyTextEdit::modelFromFile(const QString& fileName)
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly)) {
         std::cerr << "Can't open wordlist.txt file: " << fileName.toStdString() << std::endl;
-        return new QStringListModel(c);
+        return new QStringListModel(m_c);
     }
 
 #ifndef QT_NO_CURSOR
@@ -26,7 +26,7 @@ QAbstractItemModel *MyTextEdit::modelFromFile(const QString& fileName)
 #ifndef QT_NO_CURSOR
     QGuiApplication::restoreOverrideCursor();
 #endif
-    return new QStringListModel(words, c);
+    return new QStringListModel(words, m_c);
 }
 
 MyTextEdit::MyTextEdit(QWidget *parent) : QTextEdit(parent) {
@@ -39,29 +39,29 @@ MyTextEdit::MyTextEdit(const QString &text, QWidget *parent) : QTextEdit(text, p
 
 void MyTextEdit::setCompleter()
 {
-    c = new QCompleter(this);
+    m_c = new QCompleter(this);
 
-    c->setModel(modelFromFile(":/wordlist.txt"));
-    c->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
-    c->setCaseSensitivity(Qt::CaseInsensitive);
-    c->setWrapAround(false);
+    m_c->setModel(modelFromFile(":/wordlist.txt"));
+    m_c->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+    m_c->setCaseSensitivity(Qt::CaseInsensitive);
+    m_c->setWrapAround(false);
 
-    if (!c)
+    if (!m_c)
         return;
 
-    c->setWidget(this);
-    c->setCompletionMode(QCompleter::PopupCompletion);
-    c->setCaseSensitivity(Qt::CaseInsensitive);
-    QObject::connect(c, QOverload<const QString &>::of(&QCompleter::activated),
+    m_c->setWidget(this);
+    m_c->setCompletionMode(QCompleter::PopupCompletion);
+    m_c->setCaseSensitivity(Qt::CaseInsensitive);
+    QObject::connect(m_c, QOverload<const QString &>::of(&QCompleter::activated),
                      this, &MyTextEdit::insertCompletion);
 }
 
 void MyTextEdit::insertCompletion(const QString &completion)
 {
-    if (c->widget() != this)
+    if (m_c->widget() != this)
         return;
     QTextCursor tc = textCursor();
-    int extra = completion.length() - c->completionPrefix().length();
+    int extra = completion.length() - m_c->completionPrefix().length();
     tc.movePosition(QTextCursor::Left);
     tc.movePosition(QTextCursor::EndOfWord);
     tc.insertText(completion.right(extra));
@@ -78,14 +78,14 @@ QString MyTextEdit::textUnderCursor() const
 
 void MyTextEdit::focusInEvent(QFocusEvent *e)
 {
-    if (c)
-        c->setWidget(this);
+    if (m_c)
+        m_c->setWidget(this);
     QTextEdit::focusInEvent(e);
 }
 
 void MyTextEdit::keyPressEvent(QKeyEvent *e)
 {
-    if (c && c->popup()->isVisible()) {
+    if (m_c && m_c->popup()->isVisible()) {
         // The following keys are forwarded by the completer to the widget
        switch (e->key()) {
        case Qt::Key_Enter:
@@ -101,11 +101,11 @@ void MyTextEdit::keyPressEvent(QKeyEvent *e)
     }
 
     const bool isShortcut = (e->modifiers().testFlag(Qt::ControlModifier) && e->key() == Qt::Key_E); // CTRL+E
-    if (!c || !isShortcut) // do not process the shortcut when we have a completer
+    if (!m_c || !isShortcut) // do not process the shortcut when we have a completer
         QTextEdit::keyPressEvent(e);
     const bool ctrlOrShift = e->modifiers().testFlag(Qt::ControlModifier) ||
                                  e->modifiers().testFlag(Qt::ShiftModifier);
-    if (!c || (ctrlOrShift && e->text().isEmpty()))
+    if (!m_c || (ctrlOrShift && e->text().isEmpty()))
         return;
 
     static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
@@ -114,16 +114,16 @@ void MyTextEdit::keyPressEvent(QKeyEvent *e)
 
     if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
                       || eow.contains(e->text().right(1)))) {
-        c->popup()->hide();
+        m_c->popup()->hide();
         return;
     }
 
-    if (completionPrefix != c->completionPrefix()) {
-        c->setCompletionPrefix(completionPrefix);
-        c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
+    if (completionPrefix != m_c->completionPrefix()) {
+        m_c->setCompletionPrefix(completionPrefix);
+        m_c->popup()->setCurrentIndex(m_c->completionModel()->index(0, 0));
     }
     QRect cr = cursorRect();
-    cr.setWidth(c->popup()->sizeHintForColumn(0)
-                + c->popup()->verticalScrollBar()->sizeHint().width());
-    c->complete(cr); // popup it up!
+    cr.setWidth(m_c->popup()->sizeHintForColumn(0)
+                + m_c->popup()->verticalScrollBar()->sizeHint().width());
+    m_c->complete(cr); // popup it up!
 }

@@ -32,7 +32,7 @@ private:
     QAbstractItemModel* modelFromFile(const QString& fileName);
 
 private:
-    QCompleter *c = nullptr;
+    QCompleter *m_c = nullptr;
     void setCompleter();
 
 };

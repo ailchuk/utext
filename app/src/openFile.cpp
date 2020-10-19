@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 
-bool openFileWithHighlight(MyTextEdit **textEdit, Highlighter **highlighter, const QString &file_path) {
-    *highlighter = new Highlighter((*textEdit)->document());
+bool openFileWithHighlight(MyTextEdit **textEdit, Highlighter **m_highlighter, const QString &file_path) {
+    *m_highlighter = new Highlighter((*textEdit)->document());
 
     QFile file(file_path);
 

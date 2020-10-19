@@ -73,6 +73,6 @@ private:
     QString m_file_path;
     QFileSystemModel *m_model;
     MyFind *m_find_dialog;
-    Highlighter *highlighter;
+    Highlighter *m_highlighter;
 };
 #endif // MAINWINDOW_H
