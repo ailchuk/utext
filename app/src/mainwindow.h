@@ -68,8 +68,6 @@ private slots:
 
     void on_actionDark_theme_triggered();
 
-    void on_textEdit_textChanged();
-
 private:
     Ui::MainWindow *m_ui;
     QString m_file_path;

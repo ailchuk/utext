@@ -26,6 +26,7 @@ void MainWindow::showCursorPos()
 
     m_ui->statusbar->showMessage(QString("Line: %1, Column: %2").arg(line).arg(pos));
 
+    // HighLight WHILE TYPING
     QTextCursor tc = m_ui->textEdit->textCursor();
     tc.select(QTextCursor::SelectionType::WordUnderCursor);
     std::cerr << tc.selectedText().toStdString().size() << std::endl;
