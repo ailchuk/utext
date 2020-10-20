@@ -1,6 +1,7 @@
 #include <mytextedit.h>
 #include <QStringListModel>
 #include <QGuiApplication>
+#include <QTextDocumentFragment>
 
 #include <iostream>
 
@@ -31,14 +32,25 @@ QAbstractItemModel *MyTextEdit::modelFromFile(const QString& fileName)
 
 MyTextEdit::MyTextEdit(QWidget *parent) : QTextEdit(parent) {
     setCompleter();
+    setupCursorHighlightings();
 }
 
 MyTextEdit::MyTextEdit(const QString &text, QWidget *parent) : QTextEdit(text, parent) {
     setCompleter();
+    setupCursorHighlightings();
+}
+
+void MyTextEdit::setupCursorHighlightings()
+{
+    fmt.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+    fmt.setUnderlineColor(QColor(200,200,200));
+    fmt.setBackground(QBrush(QColor(230,230,230)));
 }
 
 void MyTextEdit::setCompleter()
 {
+   if (m_c)
+        m_c->disconnect(this);
     m_c = new QCompleter(this);
 
     m_c->setModel(modelFromFile(":/wordlist.txt"));
@@ -72,7 +84,12 @@ void MyTextEdit::insertCompletion(const QString &completion)
 QString MyTextEdit::textUnderCursor() const
 {
     QTextCursor tc = textCursor();
-    tc.select(QTextCursor::WordUnderCursor);
+
+
+    tc.select(QTextCursor::SelectionType::WordUnderCursor);
+
+
+
     return tc.selectedText();
 }
 
@@ -111,6 +128,8 @@ void MyTextEdit::keyPressEvent(QKeyEvent *e)
     static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
     const bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
     QString completionPrefix = textUnderCursor();
+
+
 
     if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
                       || eow.contains(e->text().right(1)))) {

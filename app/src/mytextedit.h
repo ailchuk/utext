@@ -11,6 +11,10 @@
 #include <QAbstractItemModel>
 #include <QScrollBar>
 #include <QAbstractItemView>
+#include <QTextCharFormat>
+#include <QTextCursor>
+#include <QList>
+
 
 class MyTextEdit : public QTextEdit
 {
@@ -19,6 +23,9 @@ public:
     explicit MyTextEdit(QWidget *parent = nullptr);
     explicit MyTextEdit(const QString &text, QWidget *parent = nullptr);
     ~MyTextEdit() {};
+
+    QTextCharFormat fmt;
+    QList<ExtraSelection> selections;
 
 protected:
     void keyPressEvent(QKeyEvent *e) override;
@@ -30,10 +37,11 @@ private slots:
 private:
     QString textUnderCursor() const;
     QAbstractItemModel* modelFromFile(const QString& fileName);
+    void setCompleter();
+    void setupCursorHighlightings();
 
 private:
     QCompleter *m_c = nullptr;
-    void setCompleter();
 
 };
 
