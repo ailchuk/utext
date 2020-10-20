@@ -95,6 +95,16 @@ void MainWindow::on_actionFont_triggered()
 {
     bool is_font;
     QFont font = QFontDialog::getFont(&is_font, this);
+    QTextCursor cursor(m_ui->textEdit->textCursor());
+    QString sel = cursor.selectedText();
+
+    if (!sel.isEmpty()) {
+        QTextCharFormat format;
+
+        format.setFont(font);
+        cursor.mergeCharFormat(format);
+        return;
+    }
 
     if (is_font) {
         m_ui->textEdit->setFont(font);
