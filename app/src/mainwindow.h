@@ -18,6 +18,7 @@
 #include "myfind.h"
 #include "highlighter.h"
 #include "openFile.h"
+#include "mytextedit.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -72,6 +73,6 @@ private:
     QString m_file_path;
     QFileSystemModel *m_model;
     MyFind *m_find_dialog;
-    Highlighter *highlighter;
+    Highlighter *m_highlighter;
 };
 #endif // MAINWINDOW_H

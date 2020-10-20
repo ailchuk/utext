@@ -13,7 +13,7 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &idx)
         return;
     }
 
-    if (!openFileWithHighlight(&m_ui->textEdit, &highlighter, m_model->fileInfo(idx).absoluteFilePath())) {
+    if (!openFileWithHighlight(&m_ui->textEdit, &m_highlighter, m_model->fileInfo(idx).absoluteFilePath())) {
         QMessageBox::warning(this, "utext: Error", "Can't read/open selected file!");
         return;
     }

@@ -15,3 +15,4 @@ set(CMAKE_AUTORCC ON)
 add_subdirectory(app)
 
 target_include_directories(${TARGET} PUBLIC ${PROJECT_BINARY_DIR})
+

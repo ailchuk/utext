@@ -15,7 +15,7 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
 
-    if (!openFileWithHighlight(&m_ui->textEdit, &highlighter, file_name)) {
+    if (!openFileWithHighlight(&m_ui->textEdit, &m_highlighter, file_name)) {
         QMessageBox::warning(this, "utext: Error", "Can't read/open file!");
         return;
     }

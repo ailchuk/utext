@@ -13,5 +13,6 @@
         <file>color.png</file>
         <file>background_color.png</file>
         <file>find.png</file>
+        <file>wordlist.txt</file>
     </qresource>
 </RCC>

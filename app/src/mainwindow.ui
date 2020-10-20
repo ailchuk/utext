@@ -58,7 +58,7 @@
         <bool>false</bool>
        </attribute>
       </widget>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="MyTextEdit" name="textEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>1</horstretch>
@@ -82,7 +82,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -349,6 +349,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>mytextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources/myres.qrc"/>
  </resources>

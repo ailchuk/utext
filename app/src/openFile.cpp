@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 
-bool openFileWithHighlight(QTextEdit **textEdit, Highlighter **highlighter, const QString &file_path) {
-    *highlighter = new Highlighter((*textEdit)->document());
+bool openFileWithHighlight(MyTextEdit **textEdit, Highlighter **m_highlighter, const QString &file_path) {
+    *m_highlighter = new Highlighter((*textEdit)->document());
 
     QFile file(file_path);
 
@@ -9,18 +9,17 @@ bool openFileWithHighlight(QTextEdit **textEdit, Highlighter **highlighter, cons
         return false;
     }
 
-    (*textEdit)->setText(file.readAll());
-    //m_ui->textEdit->setPlainText(file.readAll());
+    (*textEdit)->setPlainText(file.readAll());
     return true;
 }
 
-bool openFileWithoutHighlight(QTextEdit **textEdit, QString &file_path) {
+bool openFileWithoutHighlight(MyTextEdit **textEdit, QString &file_path) {
     QFile file(file_path);
 
     if (!file.open(QFile::ReadOnly | QFile::Text) || !file.isReadable()) {
         return false;
     }
 
-    (*textEdit)->setText(file.readAll());
+    (*textEdit)->setPlainText(file.readAll());
     return true;
 }
