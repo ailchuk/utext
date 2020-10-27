@@ -26,10 +26,13 @@ public:
 
     QTextCharFormat fmt;
     QList<ExtraSelection> selections;
+    int m_tcWordBegin = 0;
 
 protected:
     void keyPressEvent(QKeyEvent *e) override;
     void focusInEvent(QFocusEvent *e) override;
+
+
 
 private slots:
     void insertCompletion(const QString &completion);
@@ -40,8 +43,11 @@ private:
     void setCompleter();
     void setupCursorHighlightings();
 
+
+
 private:
     QCompleter *m_c = nullptr;
+
 
 };
 
