@@ -81,5 +81,4 @@ void Highlighter::highlightBlock(const QString &text)
         setFormat(startIndex, commentLength, m_multiLineCommentFormat);
         startIndex = text.indexOf(m_commentStartExpression, startIndex + commentLength);
     }
-
 }

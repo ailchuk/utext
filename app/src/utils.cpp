@@ -28,28 +28,20 @@ void MainWindow::showCursorPos()
 
     // HighLight WHILE TYPING
     QTextCursor tc = m_ui->textEdit->textCursor();
-
     tc.select(QTextCursor::SelectionType::WordUnderCursor);
-
-    std::cerr << tc.anchor() << std::endl;
     if (tc.anchor() != m_ui->textEdit->m_tcWordBegin) {
-        m_ui->textEdit->selections.clear();
-        m_ui->textEdit->setExtraSelections(m_ui->textEdit->selections);
+        m_ui->textEdit->m_selections.clear();
+        m_ui->textEdit->setExtraSelections(m_ui->textEdit->m_selections);
         m_ui->textEdit->m_tcWordBegin = tc.anchor();
     }
-    if (tc.anchor() == m_ui->textEdit->m_tcWordBegin) {
-        //std::cerr << tc.anchor() << " " << tc.position() << std::endl;
-        //tc.movePosition(QTextCursor::StartOfWord);
-        //tc.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
-        std::cerr << tc.selectedText().toStdString() << std::endl;
-
+    if (tc.anchor() == m_ui->textEdit->m_tcWordBegin && tc.anchor() != tc.position()) {
         MyTextEdit::ExtraSelection sel;
 
         QTextEdit::ExtraSelection selection;
 
-        selection.format.setBackground(Qt::green);
+        selection.format.setBackground(m_ui->textEdit->m_color);
         selection.cursor = tc;
-        m_ui->textEdit->selections.append(selection);
-        m_ui->textEdit->setExtraSelections(m_ui->textEdit->selections);
+        m_ui->textEdit->m_selections.append(selection);
+        m_ui->textEdit->setExtraSelections(m_ui->textEdit->m_selections);
     }
 }

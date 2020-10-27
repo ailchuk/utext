@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     on_actionLight_theme_triggered();
     connect(m_ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(showCursorPos()));
+    m_highlighter = new Highlighter();
 }
 
 MainWindow::~MainWindow()

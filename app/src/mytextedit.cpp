@@ -9,7 +9,7 @@ QAbstractItemModel *MyTextEdit::modelFromFile(const QString& fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly)) {
-        std::cerr << "Can't open wordlist.txt file: " << fileName.toStdString() << std::endl;
+        // "Can't open wordlist.txt file: "
         return new QStringListModel(m_c);
     }
 
@@ -42,9 +42,9 @@ MyTextEdit::MyTextEdit(const QString &text, QWidget *parent) : QTextEdit(text, p
 
 void MyTextEdit::setupCursorHighlightings()
 {
-    fmt.setUnderlineStyle(QTextCharFormat::SingleUnderline);
-    fmt.setUnderlineColor(QColor(200,200,200));
-    fmt.setBackground(QBrush(QColor(230,230,230)));
+    m_fmt.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+    m_fmt.setUnderlineColor(QColor(200,200,200));
+    m_fmt.setBackground(QBrush(QColor(230,230,230)));
 }
 
 void MyTextEdit::setCompleter()
@@ -84,11 +84,7 @@ void MyTextEdit::insertCompletion(const QString &completion)
 QString MyTextEdit::textUnderCursor() const
 {
     QTextCursor tc = textCursor();
-
-
     tc.select(QTextCursor::SelectionType::WordUnderCursor);
-
-
 
     return tc.selectedText();
 }

@@ -68,11 +68,17 @@ private slots:
 
     void on_actionDark_theme_triggered();
 
+    void on_actionSyntax_highlighting_triggered();
+
+    void on_actionBackground_color_of_editing_text_triggered();
+
 private:
     Ui::MainWindow *m_ui;
     QString m_file_path;
     QFileSystemModel *m_model;
     MyFind *m_find_dialog;
     Highlighter *m_highlighter;
+    bool m_highlighterStatus = false;
+
 };
 #endif // MAINWINDOW_H

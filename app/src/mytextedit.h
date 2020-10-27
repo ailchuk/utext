@@ -14,6 +14,7 @@
 #include <QTextCharFormat>
 #include <QTextCursor>
 #include <QList>
+#include <QBrush>
 
 
 class MyTextEdit : public QTextEdit
@@ -24,15 +25,14 @@ public:
     explicit MyTextEdit(const QString &text, QWidget *parent = nullptr);
     ~MyTextEdit() {};
 
-    QTextCharFormat fmt;
-    QList<ExtraSelection> selections;
+    QTextCharFormat m_fmt;
+    QList<ExtraSelection> m_selections;
     int m_tcWordBegin = 0;
+    QBrush m_color = Qt::green;
 
 protected:
     void keyPressEvent(QKeyEvent *e) override;
     void focusInEvent(QFocusEvent *e) override;
-
-
 
 private slots:
     void insertCompletion(const QString &completion);
@@ -43,12 +43,8 @@ private:
     void setCompleter();
     void setupCursorHighlightings();
 
-
-
 private:
     QCompleter *m_c = nullptr;
-
-
 };
 
 #endif // MYTEXTEDIT_H

@@ -15,9 +15,17 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
 
-    if (!openFileWithHighlight(&m_ui->textEdit, &m_highlighter, file_name)) {
-        QMessageBox::warning(this, "utext: Error", "Can't read/open file!");
-        return;
+    if (m_highlighterStatus) {
+        if (!openFileWithHighlight(&m_ui->textEdit, &m_highlighter, file_name)) {
+            QMessageBox::warning(this, "utext: Error", "Can't read/open selected file!");
+            return;
+        }
+    }
+    else {
+        if (!openFileWithoutHighlight(&m_ui->textEdit, file_name)) {
+            QMessageBox::warning(this, "utext: Error", "Can't read/open selected file!");
+            return;
+        }
     }
 
     m_file_path = file_name;
@@ -138,4 +146,26 @@ void MainWindow::on_actionFind_triggered()
 
     m_find_dialog = new MyFind(this, m_ui->textEdit, &sel);
     m_find_dialog->show();
+}
+
+void MainWindow::on_actionSyntax_highlighting_triggered()
+{
+    if (this->m_highlighterStatus) {
+        this->m_highlighterStatus = false;
+        m_highlighter->setDocument(0);
+
+    }
+    else {
+        m_highlighter->setDocument(m_ui->textEdit->document());
+        this->m_highlighterStatus = true;
+    }
+}
+
+void MainWindow::on_actionBackground_color_of_editing_text_triggered()
+{
+    QColor background_color = QColorDialog::getColor(Qt::white, this, "Choose Background Color");
+
+    if (background_color.isValid()) {
+        m_ui->textEdit->m_color = background_color;
+    }
 }
