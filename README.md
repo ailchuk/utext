@@ -30,7 +30,8 @@ If you do not have ```CMAKE_PREFIX_PATH``` you can fix it in 2 ways:
 - find/replace/undo/redo options in the Toolbar 
 - keyboard shortcuts
 - ability to copy/cut/paste/find/replace for the selected piece of text
-- syntax highlighting for source code, markup languages, config files and other text that appears in an organized or predictable format
+- syntax highlighting for source code, markup languages, config files and other text that appears in an organized or predictable format (you can change highliting color)
+- highlighting when typing (you can change highliting color)
 - basic text formatting (font style, font size, color, background color etc.)
 - autocompletion and auto-indentation
 - dark & light themes
